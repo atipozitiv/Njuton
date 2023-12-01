@@ -9,6 +9,9 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Njuton.Program;
+using MathNet.Numerics;
+using org.matheval;
 
 namespace Njuton {
   public partial class Form1 : Form {
@@ -22,7 +25,6 @@ namespace Njuton {
 
     private void Form1_Load(object sender, EventArgs e) {
       label5.Visible = false;
-      label7.Visible = false;
     }
     public void Mistake() {
       label5.Visible = true;
@@ -30,25 +32,32 @@ namespace Njuton {
       label2.Visible = false;
       label3.Visible = false;
       label4.Visible = false;
+      label7.Visible = false;
       label6.Text = "";
       label8.Text = "";
       textBox1.Visible = false;
       textBox2.Visible = false;
       textBox3.Visible = false;
+      textBox4.Visible = false;
       chart1.Visible = false;
     }
 
-    double Func(double x) {
-      return Math.Pow(x, 5) * Math.Exp(x);
+    double Func(double x) { 
+      Expression func = new Expression(textBox4.Text.ToLower());
+      func.Bind("x", x);
+      decimal result = func.Eval<decimal>();
+      return Convert.ToDouble(result);
+      //(27-18*x+2*x^2)*exp(-x/3)
     }
     double FirstPro(double x) {
-      return (Math.Pow(x, 5) + 5 * Math.Pow(x, 4)) * Math.Exp(x);
+      double result = Differentiate.FirstDerivative(Func, x);
+      return result;
     }
 
     double Njuton(double endLine, double startLine, double precision) {
-      double x1 = 10000000;
+      double x1 = 100000;
       bool flag = false;
-      double x0 = endLine;
+      double x0 = (endLine + startLine) / 2;
       while (Math.Abs(x1-x0) > precision) {
         if (flag) {
           x0 = x1;
@@ -115,9 +124,12 @@ namespace Njuton {
         } else {
           if (checkBox1.Checked) {
             answerMin = Njuton(endLine, startLine, precision);
-            label6.Text = $"Точнка экстремума: x = {Math.Round(answerMin, 9)} y = {Math.Round(Func(answerMin), 9)}";
+            label6.Text = $"Точнка пересечения: x = {Math.Round(answerMin, 9)} y = {Math.Round(Func(answerMin), 9)}";
             label8.Text = "";
             answerMax = answerMin;
+            if (answerMax < startLine || answerMax > endLine) {
+              Mistake();
+            }
           } else {
             answerMin = GoldSechMin(endLine, startLine, precision);
             answerMax = GoldSechMax(endLine, startLine, precision);
@@ -129,7 +141,7 @@ namespace Njuton {
               label8.Text = $"Максимум: x = {answerMin} y = {Func(answerMin)}";
             }
           }
-      
+
           this.chart1.Series[1].Color = Color.Red;
           this.chart1.Series[1].Points.Clear();
           this.chart1.Series[1].Points.AddXY(answerMin, Func(answerMin));
@@ -151,22 +163,15 @@ namespace Njuton {
       label2.Visible = true;
       label3.Visible = true;
       label4.Visible = true;
-      label7.Visible = false;
+      label7.Visible = true;
       label6.Text = "";
       label8.Text = "";
       textBox1.Visible = true;
       textBox2.Visible = true;
       textBox3.Visible = true;
+      textBox4.Visible = true;
       chart1.Visible = true;
       рассчитатьToolStripMenuItem.Visible = true;
-    }
-
-    private void textBox3_TextChanged(object sender, EventArgs e) {
-
-    }
-
-    private void checkBox1_CheckedChanged(object sender, EventArgs e) {
-
     }
   }
 }

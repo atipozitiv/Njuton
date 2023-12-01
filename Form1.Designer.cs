@@ -23,10 +23,10 @@
     /// содержимое этого метода с помощью редактора кода.
     /// </summary>
     private void InitializeComponent() {
-      System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-      System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-      System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-      System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+      System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+      System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+      System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+      System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
       this.label1 = new System.Windows.Forms.Label();
       this.label2 = new System.Windows.Forms.Label();
       this.label3 = new System.Windows.Forms.Label();
@@ -45,6 +45,7 @@
       this.label7 = new System.Windows.Forms.Label();
       this.checkBox1 = new System.Windows.Forms.CheckBox();
       this.label8 = new System.Windows.Forms.Label();
+      this.textBox4 = new System.Windows.Forms.TextBox();
       this.menuStrip1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
       this.SuspendLayout();
@@ -96,7 +97,6 @@
       this.textBox3.Name = "textBox3";
       this.textBox3.Size = new System.Drawing.Size(100, 22);
       this.textBox3.TabIndex = 5;
-      this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
       // 
       // label4
       // 
@@ -104,9 +104,9 @@
       this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
       this.label4.Location = new System.Drawing.Point(90, 9);
       this.label4.Name = "label4";
-      this.label4.Size = new System.Drawing.Size(528, 29);
+      this.label4.Size = new System.Drawing.Size(941, 29);
       this.label4.TabIndex = 6;
-      this.label4.Text = "Нахождение локального минимума функции";
+      this.label4.Text = "Нахождение локального минимума функции(введите отрезок с 1 экстремумом)";
       // 
       // menuStrip1
       // 
@@ -152,23 +152,23 @@
       // 
       // chart1
       // 
-      chartArea3.Name = "ChartArea1";
-      this.chart1.ChartAreas.Add(chartArea3);
+      chartArea2.Name = "ChartArea1";
+      this.chart1.ChartAreas.Add(chartArea2);
       this.chart1.Location = new System.Drawing.Point(476, 39);
       this.chart1.Name = "chart1";
-      series7.ChartArea = "ChartArea1";
-      series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-      series7.Legend = "Legend1";
-      series7.Name = "Series1";
-      series8.ChartArea = "ChartArea1";
-      series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-      series8.Name = "Series2";
-      series9.ChartArea = "ChartArea1";
-      series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-      series9.Name = "Series3";
-      this.chart1.Series.Add(series7);
-      this.chart1.Series.Add(series8);
-      this.chart1.Series.Add(series9);
+      series4.ChartArea = "ChartArea1";
+      series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+      series4.Legend = "Legend1";
+      series4.Name = "Series1";
+      series5.ChartArea = "ChartArea1";
+      series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+      series5.Name = "Series2";
+      series6.ChartArea = "ChartArea1";
+      series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+      series6.Name = "Series3";
+      this.chart1.Series.Add(series4);
+      this.chart1.Series.Add(series5);
+      this.chart1.Series.Add(series6);
       this.chart1.Size = new System.Drawing.Size(805, 380);
       this.chart1.TabIndex = 8;
       this.chart1.Text = "chart1";
@@ -176,7 +176,7 @@
       // label5
       // 
       this.label5.AutoSize = true;
-      this.label5.Location = new System.Drawing.Point(23, 220);
+      this.label5.Location = new System.Drawing.Point(23, 222);
       this.label5.Name = "label5";
       this.label5.Size = new System.Drawing.Size(977, 16);
       this.label5.TabIndex = 9;
@@ -186,7 +186,7 @@
       // label6
       // 
       this.label6.AutoSize = true;
-      this.label6.Location = new System.Drawing.Point(26, 220);
+      this.label6.Location = new System.Drawing.Point(26, 222);
       this.label6.Name = "label6";
       this.label6.Size = new System.Drawing.Size(0, 16);
       this.label6.TabIndex = 10;
@@ -194,11 +194,11 @@
       // label7
       // 
       this.label7.AutoSize = true;
-      this.label7.Location = new System.Drawing.Point(26, 138);
+      this.label7.Location = new System.Drawing.Point(23, 172);
       this.label7.Name = "label7";
-      this.label7.Size = new System.Drawing.Size(145, 16);
+      this.label7.Size = new System.Drawing.Size(67, 16);
       this.label7.TabIndex = 11;
-      this.label7.Text = "достигнута точность";
+      this.label7.Text = "Функция:";
       // 
       // checkBox1
       // 
@@ -209,21 +209,28 @@
       this.checkBox1.TabIndex = 12;
       this.checkBox1.Text = "использовать метод Ньютона вместо золотого сечения";
       this.checkBox1.UseVisualStyleBackColor = true;
-      this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
       // 
       // label8
       // 
       this.label8.AutoSize = true;
-      this.label8.Location = new System.Drawing.Point(26, 254);
+      this.label8.Location = new System.Drawing.Point(26, 256);
       this.label8.Name = "label8";
       this.label8.Size = new System.Drawing.Size(0, 16);
       this.label8.TabIndex = 13;
+      // 
+      // textBox4
+      // 
+      this.textBox4.Location = new System.Drawing.Point(26, 191);
+      this.textBox4.Name = "textBox4";
+      this.textBox4.Size = new System.Drawing.Size(444, 22);
+      this.textBox4.TabIndex = 14;
       // 
       // Form1
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(1325, 450);
+      this.Controls.Add(this.textBox4);
       this.Controls.Add(this.label8);
       this.Controls.Add(this.checkBox1);
       this.Controls.Add(this.label7);
@@ -270,6 +277,7 @@
     private System.Windows.Forms.Label label7;
     private System.Windows.Forms.CheckBox checkBox1;
     private System.Windows.Forms.Label label8;
+    private System.Windows.Forms.TextBox textBox4;
   }
 }
 
